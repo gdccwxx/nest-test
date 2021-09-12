@@ -26,4 +26,9 @@ export class StudentsController {
     getNameById(@Query('id', ParseIntPipe) id: number) {
         return this.studentsService.getStudentName(id);
     }
+
+    @Post('set-student-name')
+    setStudentName(@User() user: string) {
+        return this.studentsService.setStudent(user);
+    }
 }

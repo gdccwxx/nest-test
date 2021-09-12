@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, ParseIntPipe } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { StudentDto } from './dtos/students.dto';
 
@@ -14,5 +14,10 @@ export class StudentsController {
     @Post('who-are-you')
     whoAreYouPost(@Body() student: StudentDto) {
         return this.studentsService.ImStudent(student.name);
+    }
+
+    @Get('get-name-by-id')
+    getNameById(@Query('id', ParseIntPipe) id: number) {
+        return this.studentsService.getStudentName(id);
     }
 }

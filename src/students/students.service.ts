@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class StudentsService {
-    ImStudent() {
-        return 'Im student';
+    ImStudent(name?: string) {
+        return 'Im student ' + name;
     }
 }

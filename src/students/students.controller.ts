@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Query, ParseIntPipe } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { StudentDto } from './dtos/students.dto';
+import { User } from '../common/decorators';
 
 @Controller('students')
 export class StudentsController {
@@ -14,6 +15,11 @@ export class StudentsController {
     @Post('who-are-you')
     whoAreYouPost(@Body() student: StudentDto) {
         return this.studentsService.ImStudent(student.name);
+    }
+
+    @Post('who-is-request')
+    whoIsReq(@User() user: string) {
+        return user;
     }
 
     @Get('get-name-by-id')

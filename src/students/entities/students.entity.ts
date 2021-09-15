@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import { ManyToOne, JoinColumn, Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import { Classes } from './classes.entity';
 
 @Entity()
 export class Student {
@@ -7,6 +8,9 @@ export class Student {
 
   @Column({ type: 'varchar' })
   name: string;
+
+  @ManyToOne(() => Classes, classes => classes.students)
+  class: Classes;
 
   @UpdateDateColumn()
   updateDate: Date;

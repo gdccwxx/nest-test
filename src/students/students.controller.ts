@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Query, ParseIntPipe } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { StudentDto } from './dtos/students.dto';
+import { ClassesDto } from './dtos/classes.dto';
 import { User } from '../common/decorators';
 
 @Controller('students')
@@ -30,5 +31,15 @@ export class StudentsController {
     @Post('set-student-name')
     setStudentName(@User() user: string) {
         return this.studentsService.setStudent(user);
+    }
+
+    @Get('get-class')
+    getClass(@Query('id', ParseIntPipe) id: number) {
+        return this.studentsService.findClass(id);
+    }
+
+    @Post('set-class')
+    setClass(@Body() classes: ClassesDto) {
+        return this.studentsService.setClass(classes.className, classes.students);
     }
 }

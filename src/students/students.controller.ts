@@ -5,13 +5,14 @@ import { ClassesDto } from './dtos/classes.dto';
 import { User, NoUser } from '../common/decorators';
 import { SensitiveOperation } from '../common/decorators';
 import { SensitiveType } from '../sensitive/constants';
+import { TransformNamePipe } from '../common/pipes/name.pipes';
 
 @Controller('students')
 export class StudentsController {
     constructor(private readonly studentsService: StudentsService) {}
   
     @Get('who-are-you')
-    whoAreYou(@Query('name') name: string) {
+    whoAreYou(@Query('name', TransformNamePipe) name: string) {
         return this.studentsService.ImStudent(name);
     }
 

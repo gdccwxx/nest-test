@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentsModule } from './students/students.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_GUARD } from '@nestjs/core';
+import { UserGuard } from './common/guard/user.guard';
 
 @Module({
   imports: [
@@ -20,6 +22,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: UserGuard,
+    },
+    AppService
+  ],
 })
-export class AppModule {}
+export class AppModule { }

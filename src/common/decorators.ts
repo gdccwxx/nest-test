@@ -1,4 +1,4 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { createParamDecorator, ExecutionContext, SetMetadata } from '@nestjs/common';
 
 export const User = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
@@ -7,3 +7,5 @@ export const User = createParamDecorator(
     return request.body.user;
   },
 );
+
+export const NoUser = () => SetMetadata('no-user', true);

@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post, Query, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, ParseIntPipe } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { StudentDto } from './dtos/students.dto';
 import { ClassesDto } from './dtos/classes.dto';
 import { User, NoUser } from '../common/decorators';
+import { SensitiveOperation } from '../common/decorators';
+import { SensitiveType } from '../sensitive/constants';
 
 @Controller('students')
 export class StudentsController {
@@ -29,6 +31,7 @@ export class StudentsController {
         return this.studentsService.getStudentName(id);
     }
 
+    @SensitiveOperation(SensitiveType.Set)
     @Post('set-student-name')
     setStudentName(@User() user: string) {
         return this.studentsService.setStudent(user);
